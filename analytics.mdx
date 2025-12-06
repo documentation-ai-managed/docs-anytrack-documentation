@@ -2,19 +2,20 @@
 title: Analytics & Reporting
 description: Analyze your conversion data and marketing performance in AnyTrack
 ---
-
 ## Understanding Your Marketing Performance
 
 AnyTrack's analytics dashboard provides comprehensive insights into your conversion tracking and attribution data. View real-time metrics, create custom reports, and uncover optimization opportunities across all your marketing channels.
 
-<Columns cols={3}>
-  <Card title="Real-Time Dashboard" icon="activity" href="#dashboard">
+<Columns cols="3">
+  <Card title="Real-Time Dashboard" href="#dashboard" icon="activity" horizontal="false">
     Monitor live conversion data and key performance indicators.
   </Card>
-  <Card title="Custom Reports" icon="file-text" href="#reports">
+
+  <Card title="Custom Reports" href="#reports" icon="file-text" horizontal="false">
     Build tailored reports for different stakeholders and campaigns.
   </Card>
-  <Card title="Attribution Insights" icon="target" href="#attribution">
+
+  <Card title="Attribution Insights" href="#attribution" icon="target" horizontal="false">
     Understand how different channels contribute to conversions.
   </Card>
 </Columns>
@@ -27,8 +28,9 @@ The main dashboard provides a high-level view of your marketing performance with
   <Tab title="Conversions" icon="trending-up">
     Track total conversions, conversion value, and conversion rates across all channels.
 
-    <Callout kind="info">Monitor conversion velocity to identify peak performance periods.</Callout>
+    Monitor conversion velocity to identify peak performance periods.
   </Tab>
+
   <Tab title="Attribution" icon="pie-chart">
     See how credit is distributed across your marketing touchpoints and channels.
 
@@ -36,20 +38,13 @@ The main dashboard provides a high-level view of your marketing performance with
       View detailed attribution data by channel, campaign, and time period. Compare different attribution models to understand their impact on ROI calculations.
     </Expandable>
   </Tab>
+
   <Tab title="ROI Analysis" icon="dollar-sign">
     Calculate return on ad spend and customer acquisition cost for each marketing channel.
   </Tab>
 </Tabs>
 
-<Steps>
-  <Step title="Access Dashboard" icon="log-in">Log into your AnyTrack account and navigate to the Analytics section.</Step>
-  <Step title="Set Date Range" icon="calendar">Choose the time period for your analysis.</Step>
-  <Step title="Apply Filters" icon="filter">Filter by channel, campaign, or custom segments.</Step>
-  <Step title="Customize View" icon="settings">Add or remove widgets to focus on key metrics.</Step>
-  <Step title="Export Data" icon="download">Download reports or schedule automated exports.</Step>
-</Steps>
-
-<Callout kind="tip">Use dashboard bookmarks to save frequently used views and filters for quick access.</Callout>
+Use dashboard bookmarks to save frequently used views and filters for quick access.
 
 ## Custom Reporting
 
@@ -59,43 +54,46 @@ Create detailed reports tailored to your specific business needs. Share insights
   <Expandable title="Report Builder" default-open="true">
     Use our drag-and-drop report builder to create custom visualizations and data tables.
 
-    <CodeGroup tabs="Dashboard,API">
+    <CodeGroup show-lines="true" tabs={[]}>
       ```javascript
-// Create custom report
-const report = {
-  name: 'Monthly Performance',
-  metrics: ['conversions', 'revenue', 'roas'],
-  dimensions: ['channel', 'campaign'],
-  filters: { dateRange: 'last_30_days' },
-  schedule: 'monthly'
-};
-await anytrack.createReport(report);
+      // Create custom report
+      const report = {
+      name: 'Monthly Performance',
+      metrics: ['conversions', 'revenue', 'roas'],
+      dimensions: ['channel', 'campaign'],
+      filters: { dateRange: 'last_30_days' },
+      schedule: 'monthly'
+      };
+      await anytrack.createReport(report);
       ```
+
       ```javascript
-// API access
-const reports = await anytrack.getReports({
-  type: 'custom',
-  limit: 10
-});
+      // API access
+      const reports = await anytrack.getReports({
+      type: 'custom',
+      limit: 10
+      });
       ```
     </CodeGroup>
   </Expandable>
+
   <Expandable title="Automated Reports" default-open="false">
     Schedule reports to be generated and delivered automatically via email or API webhook.
   </Expandable>
+
   <Expandable title="Team Sharing" default-open="false">
     Share reports with team members and set appropriate permission levels for data access.
   </Expandable>
 </ExpandableGroup>
 
-| Report Type | Frequency | Recipients | Use Case |
-|-------------|-----------|------------|----------|
-| Daily Summary | Daily | Marketing Team | Quick performance check |
-| Weekly Deep Dive | Weekly | Management | Strategic planning |
-| Monthly ROI | Monthly | Executives | Business review |
-| Campaign Specific | Ad-hoc | Campaign Managers | Campaign optimization |
+| Report Type       | Frequency | Recipients        | Use Case                |
+| ----------------- | --------- | ----------------- | ----------------------- |
+| Daily Summary     | Daily     | Marketing Team    | Quick performance check |
+| Weekly Deep Dive  | Weekly    | Management        | Strategic planning      |
+| Monthly ROI       | Monthly   | Executives        | Business review         |
+| Campaign Specific | Ad-hoc    | Campaign Managers | Campaign optimization   |
 
-<Callout kind="info">Reports can be exported in multiple formats including PDF, CSV, and Excel.</Callout>
+Reports can be exported in multiple formats including PDF, CSV, and Excel.
 
 ## Attribution Analysis
 
@@ -105,7 +103,7 @@ Dive deep into how your marketing channels work together to drive conversions. U
   Visualize customer journeys from first touch to conversion. Identify common paths and optimization opportunities.
 
   ```mermaid
-graph LR
+  graph LR
     A[Organic Search] --> B[Email Newsletter]
     B --> C[Paid Social]
     C --> D[Conversion]
@@ -114,15 +112,7 @@ graph LR
   ```
 </Expandable>
 
-<Steps>
-  <Step title="Select Attribution Model" icon="target">Choose from first-touch, last-touch, or data-driven models.</Step>
-  <Step title="Analyze Channel Performance" icon="bar-chart">Compare ROI across different marketing channels.</Step>
-  <Step title="Identify Optimization Opportunities" icon="lightbulb">Find underperforming channels and high-potential areas.</Step>
-  <Step title="Test Changes" icon="flask">Run A/B tests on attribution models or channel allocations.</Step>
-  <Step title="Implement Improvements" icon="check">Apply insights to optimize your marketing strategy.</Step>
-</Steps>
-
-<Callout kind="danger">Remember that different attribution models can significantly impact ROI calculations. Choose the model that best reflects your customer journey.</Callout>
+Remember that different attribution models can significantly impact ROI calculations. Choose the model that best reflects your customer journey.
 
 ## Advanced Analytics
 
@@ -132,12 +122,14 @@ Use AnyTrack's advanced analytics features for deeper insights and predictive mo
   <Expandable title="Predictive Analytics" default-open="false">
     Forecast future conversion rates and optimize budget allocation using machine learning models.
   </Expandable>
+
   <Expandable title="Cohort Analysis" default-open="false">
     Analyze customer behavior over time and identify retention patterns.
   </Expandable>
+
   <Expandable title="Funnel Analysis" default-open="false">
     Track conversion rates at each stage of your marketing and sales funnel.
   </Expandable>
 </ExpandableGroup>
 
-<Callout kind="tip">Combine AnyTrack data with your CRM or business intelligence tools for even deeper insights.</Callout>
+Combine AnyTrack data with your CRM or business intelligence tools for even deeper insights.
