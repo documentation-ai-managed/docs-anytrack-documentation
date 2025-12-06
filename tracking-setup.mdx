@@ -1,0 +1,136 @@
+---
+title: Tracking Setup
+description: Configure conversion tracking and attribution in AnyTrack
+---
+
+## Setting Up Conversion Tracking
+
+AnyTrack's tracking setup is designed to be simple yet powerful. Our platform supports multiple tracking methods including pixels, server-side tracking, and API-based implementations. Choose the method that best fits your technical requirements and data privacy needs.
+
+<Columns cols={2}>
+  <Card title="Pixel Tracking" icon="eye" href="#pixel-setup">
+    Client-side tracking with our global pixel for maximum compatibility.
+  </Card>
+  <Card title="Server-Side Tracking" icon="server" href="#server-setup">
+    Privacy-focused tracking that bypasses ad blockers and cookie restrictions.
+  </Card>
+</Columns>
+
+## Pixel Installation
+
+Our global tracking pixel is the easiest way to start monitoring conversions. It works across all devices and browsers, automatically handling cross-domain tracking and attribution.
+
+<Tabs>
+  <Tab title="Website" icon="globe">
+    Add the pixel to your website's header or use Google Tag Manager for easy deployment.
+
+    <CodeGroup tabs="Direct,GTM">
+      ```html
+<!-- Add to <head> -->
+<script>
+  !function(t,e,a,n){t.AnyTrackPixel=t.AnyTrackPixel||[],t.AnyTrackPixel.methods=["track","identify","page"],t.AnyTrackPixel.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);return e.unshift(t),t.AnyTrackPixel.push(e),t.AnyTrackPixel}};for(var i=0;i<t.AnyTrackPixel.methods.length;i++){var c=t.AnyTrackPixel.methods[i];t.AnyTrackPixel[c]=t.AnyTrackPixel.factory(c)}t.AnyTrackPixel.load=function(t){var e=document.createElement("script");e.type="text/javascript",e.async=!0,e.src="https://cdn.anytrack.com/pixel.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(e,a),t.AnyTrackPixel._loadOptions=t},t.AnyTrackPixel.load({pixelId:"YOUR_PIXEL_ID"})}(window);
+</script>
+      ```
+      ```javascript
+// Google Tag Manager
+const gtag = window.gtag || function() { dataLayer.push(arguments); };
+gtag('config', 'YOUR_PIXEL_ID');
+      ```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Mobile Apps" icon="smartphone">
+    Integrate our SDK for iOS and Android apps to track in-app conversions and user behavior.
+
+    <Steps>
+      <Step title="Install SDK" icon="download">Add AnyTrack SDK via CocoaPods or Gradle.</Step>
+      <Step title="Initialize" icon="settings">Configure your pixel ID in the app delegate.</Step>
+      <Step title="Track Events" icon="target">Implement event tracking for key user actions.</Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+<Callout kind="info">The pixel automatically handles GDPR compliance and cookie consent management.</Callout>
+
+## Server-Side Tracking
+
+For enhanced privacy and accuracy, use our server-side tracking endpoints. This method is immune to ad blockers and provides more reliable data collection.
+
+<ExpandableGroup>
+  <Expandable title="API Endpoints" default-open="true">
+    Send conversion data directly to our servers using REST API calls.
+
+    ```javascript
+const conversion = {
+  pixelId: 'your-pixel-id',
+  event: 'purchase',
+  value: 99.99,
+  currency: 'USD',
+  userId: 'user123',
+  timestamp: new Date().toISOString()
+};
+
+fetch('https://api.anytrack.com/v1/track', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer your-api-key'
+  },
+  body: JSON.stringify(conversion)
+});
+    ```
+  </Expandable>
+  <Expandable title="Webhook Integration" default-open="false">
+    Configure webhooks from your e-commerce platform or CRM to automatically send conversion data to AnyTrack.
+  </Expandable>
+</ExpandableGroup>
+
+<Steps>
+  <Step title="Generate API Key" icon="key">Create an API key in your AnyTrack dashboard for server-side authentication.</Step>
+  <Step title="Configure Endpoints" icon="settings">Set up your server to call AnyTrack's tracking endpoints on conversion events.</Step>
+  <Step title="Test Implementation" icon="check">Use our testing tools to verify data is being received correctly.</Step>
+  <Step title="Go Live" icon="rocket">Enable live tracking and monitor your attribution data.</Step>
+</Steps>
+
+<Callout kind="tip">Combine pixel and server-side tracking for maximum data accuracy and redundancy.</Callout>
+
+## Attribution Configuration
+
+Configure how AnyTrack attributes conversions across your marketing touchpoints. Choose from multiple attribution models or create custom rules.
+
+| Model | Description | Best For |
+|-------|-------------|----------|
+| First Touch | Credits initial interaction | Brand awareness campaigns |
+| Last Touch | Credits final interaction | Direct response campaigns |
+| Linear | Equal credit across touches | Multi-step customer journeys |
+| Data-Driven | ML-based attribution | Advanced optimization |
+
+<Expandable title="Custom Attribution Rules" default-open="false">
+  Create custom attribution models using our rule builder. Set time decay, position-based weighting, and channel-specific rules.
+
+  ```javascript
+const customModel = {
+  name: 'Custom Model',
+  rules: [
+    { channel: 'paid_search', weight: 0.4 },
+    { channel: 'social', weight: 0.3 },
+    { channel: 'email', weight: 0.3 }
+  ],
+  timeDecay: 'exponential',
+  lookbackWindow: 30
+};
+await anytrack.createAttributionModel(customModel);
+  ```
+</Expandable>
+
+## Validation and Testing
+
+Before launching campaigns, thoroughly test your tracking setup to ensure accurate data collection.
+
+<Callout kind="danger">Always test tracking in a staging environment before deploying to production.</Callout>
+
+<Steps>
+  <Step title="Use Test Pixel" icon="flask">Generate test conversions using our dashboard tools.</Step>
+  <Step title="Verify Integrations" icon="check-circle">Check that connected platforms are receiving data.</Step>
+  <Step title="Monitor Logs" icon="file-text">Review tracking logs for any errors or missing data.</Step>
+  <Step title="Run End-to-End Test" icon="play">Simulate complete customer journeys to validate attribution.</Step>
+</Steps>

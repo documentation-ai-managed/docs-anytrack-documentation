@@ -1,0 +1,130 @@
+---
+title: Integrations
+description: Connect AnyTrack with your marketing platforms and apps
+---
+
+## Connecting Your Marketing Ecosystem
+
+AnyTrack integrates seamlessly with over 100 marketing platforms, ad networks, and business tools. Our no-code approach means you can connect everything from Google Ads to Shopify without writing a single line of code. This unified approach ensures your conversion data flows consistently across all your tools.
+
+<Columns cols={2}>
+  <Card title="Ad Platforms" icon="megaphone" href="#ad-platforms">
+    Connect Google Ads, Facebook, TikTok, and more for automated conversion tracking.
+  </Card>
+  <Card title="E-commerce" icon="shopping-cart" href="#ecommerce">
+    Sync with Shopify, WooCommerce, and other stores for complete purchase attribution.
+  </Card>
+</Columns>
+
+## Ad Platform Integrations
+
+Our ad platform integrations enable automatic conversion data syncing, pixel optimization, and audience creation. When a conversion occurs, AnyTrack immediately updates all connected ad platforms with the latest data.
+
+<Tabs>
+  <Tab title="Google Ads" icon="search">
+    Connect your Google Ads account for enhanced conversion tracking and automated bid optimization.
+
+    <CodeGroup tabs="OAuth,API Key">
+      ```javascript
+// OAuth connection
+const anytrack = new AnyTrack();
+await anytrack.connectGoogleAds({
+  clientId: 'your-client-id',
+  redirectUri: 'https://your-app.com/callback'
+});
+      ```
+      ```javascript
+// API Key connection
+const anytrack = new AnyTrack();
+await anytrack.setGoogleAdsApiKey('your-api-key');
+      ```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Facebook Ads" icon="facebook">
+    Enable comprehensive Facebook pixel tracking and custom audience creation.
+
+    <Steps>
+      <Step title="Authorize" icon="key">Grant AnyTrack access to your Facebook Business account.</Step>
+      <Step title="Select Pixels" icon="eye">Choose which pixels to sync with AnyTrack data.</Step>
+      <Step title="Configure Events" icon="settings">Map your conversion events to Facebook standard events.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="TikTok Ads" icon="music">
+    Track TikTok campaign performance with real-time conversion data.
+  </Tab>
+</Tabs>
+
+<Callout kind="info">All integrations support both OAuth and API key authentication methods for maximum security.</Callout>
+
+## E-commerce Platform Connections
+
+Connect your online store to automatically track purchases, cart abandonments, and customer lifetime value. AnyTrack supports both client-side and server-side tracking methods.
+
+<ExpandableGroup>
+  <Expandable title="Shopify Integration" default-open="true">
+    Our Shopify app provides one-click installation and automatic order tracking. Simply install the app from the Shopify App Store and authorize the connection.
+
+    <CodeGroup tabs="App Store,Manual">
+      ```bash
+# Install via Shopify App Store
+1. Search for "AnyTrack" in Shopify App Store
+2. Click "Add app" and authorize
+3. Complete setup wizard
+      ```
+      ```javascript
+// Manual installation
+const shopify = new Shopify({
+  shop: 'your-store.myshopify.com',
+  accessToken: 'your-access-token'
+});
+await anytrack.connectShopify(shopify);
+      ```
+    </CodeGroup>
+  </Expandable>
+  <Expandable title="WooCommerce Setup" default-open="false">
+    For WordPress/WooCommerce sites, install our plugin and configure your tracking settings. The plugin handles both frontend and backend event tracking.
+  </Expandable>
+  <Expandable title="Other Platforms" default-open="false">
+    AnyTrack supports BigCommerce, Magento, and custom e-commerce platforms through our REST API or webhook integrations.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="tip">Test your integrations using our built-in validation tools to ensure data is flowing correctly before going live with campaigns.</Callout>
+
+## CRM and Email Marketing
+
+Connect your customer relationship management and email marketing tools to create unified customer profiles and automated workflows.
+
+| Platform | Features | Setup Time |
+|----------|----------|------------|
+| HubSpot | Contact sync, deal tracking | `<5 minutes` |
+| Mailchimp | Audience segmentation, automated emails | `<10 minutes` |
+| Salesforce | Lead scoring, opportunity tracking | `<15 minutes` |
+
+<Steps>
+  <Step title="Choose Platform" icon="list">Select your CRM or email tool from our integration directory.</Step>
+  <Step title="Authenticate" icon="key">Provide API credentials or authorize OAuth access.</Step>
+  <Step title="Map Fields" icon="settings">Configure field mappings between AnyTrack and your CRM.</Step>
+  <Step title="Test Connection" icon="check">Verify data sync and event tracking are working.</Step>
+</Steps>
+
+## Advanced Integrations
+
+For custom or enterprise needs, AnyTrack provides webhook endpoints and a comprehensive REST API for building custom integrations.
+
+<Expandable title="Webhook Configuration" default-open="false">
+  Set up webhooks to receive real-time notifications when conversions occur. Configure endpoints for different event types and include custom headers for authentication.
+
+  ```javascript
+const webhook = {
+  url: 'https://your-app.com/webhook',
+  events: ['conversion', 'attribution'],
+  headers: {
+    'Authorization': 'Bearer your-token'
+  }
+};
+await anytrack.createWebhook(webhook);
+  ```
+</Expandable>
+
+<Callout kind="danger">Always use HTTPS endpoints for webhooks to ensure data security and prevent interception.</Callout>

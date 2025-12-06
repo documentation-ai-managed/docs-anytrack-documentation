@@ -1,0 +1,207 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: AnyTrack API
+  license:
+    name: MIT
+servers:
+  - url: https://api.anytrack.com/v1
+paths:
+  /conversions:
+    get:
+      summary: List all conversions
+      operationId: listConversions
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: An paged array of conversions
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversions'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a conversion
+      operationId: createConversions
+      responses:
+        201:
+          description: Conversion created successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /conversions/{conversionId}:
+    get:
+      summary: Info for a specific conversion
+      operationId: showConversionById
+      parameters:
+        - name: conversionId
+          in: path
+          required: true
+          description: The id of the conversion to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Expected response to a valid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversions'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /attributions:
+    get:
+      summary: List all attributions
+      operationId: listAttributions
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: An paged array of attributions
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Attributions'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create an attribution
+      operationId: createAttributions
+      responses:
+        201:
+          description: Attribution created successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /integrations:
+    get:
+      summary: List all integrations
+      operationId: listIntegrations
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: An paged array of integrations
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Integrations'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Conversion:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        tag:
+          type: string
+    Conversions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Conversion'
+    Attribution:
+      required:
+        - id
+        - channel
+      properties:
+        id:
+          type: integer
+          format: int64
+        channel:
+          type: string
+        value:
+          type: number
+    Attributions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Attribution'
+    Integration:
+      required:
+        - id
+        - platform
+      properties:
+        id:
+          type: integer
+          format: int64
+        platform:
+          type: string
+        status:
+          type: string
+    Integrations:
+      type: array
+      items:
+        $ref: '#/components/schemas/Integration'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
